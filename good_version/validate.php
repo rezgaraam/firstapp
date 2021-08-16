@@ -13,9 +13,9 @@ if (!$price)
 {
     $errors[]='product price is required';
 }
-if (!is_dir('images'))
+if (!is_dir(__DIR__.'/public/images'))
 {
-    mkdir('images');
+    mkdir(__DIR__.'/public/images');
 }
 if (empty($errors))
 {
@@ -26,10 +26,10 @@ if (empty($errors))
     {
         if ($product['image'])
         {
-            unlink($product['image']);//ba in aks ghabli ra hazf mikonim
+            unlink(__DIR__.'/public/'.$product['image']);//ba in aks ghabli ra hazf mikonim
         }
         $imagepath='images/'.randomString(8).'/'.$image['name'];
-        mkdir(dirname($imagepath));
-        move_uploaded_file($image['tmp_name'],$imagepath);
+        mkdir(dirname(__DIR__.'/public/'.$imagepath));
+        move_uploaded_file($image['tmp_name'],__DIR__.'/public/'.$imagepath);
     }
 }
